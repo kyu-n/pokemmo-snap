@@ -59,7 +59,7 @@ parts:
     plugin: dump
     source: https://github.com/PokeMMO/pokemmo-launcher/releases/download/v4.0c/build.zip
     source-type: zip
-    source-checksum: sha256/sha256:82bdd4867eea8bd4a6eecb52520f723979e2a0994821d8c434a6d3db2d1e793b
+    source-checksum: sha256/82bdd4867eea8bd4a6eecb52520f723979e2a0994821d8c434a6d3db2d1e793b
     override-build: |
       case "$CRAFT_ARCH_BUILD_FOR" in
         amd64) cp linux/x64/PokeMMO-Updater $CRAFT_PART_INSTALL/launcher ;;
