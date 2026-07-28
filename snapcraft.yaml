@@ -1,7 +1,7 @@
 name: pokemmo
 title: PokeMMO
 base: core24
-version: '4.0c'
+version: '4.0d'
 summary: PokeMMO Game Client
 license: 'Proprietary'
 grade: stable
@@ -57,9 +57,9 @@ apps:
 parts:
   pokemmo:
     plugin: dump
-    source: https://github.com/PokeMMO/pokemmo-launcher/releases/download/v4.0c/build.zip
+    source: https://github.com/PokeMMO/pokemmo-launcher/releases/download/v4.0d/build.zip
     source-type: zip
-    source-checksum: sha256/82bdd4867eea8bd4a6eecb52520f723979e2a0994821d8c434a6d3db2d1e793b
+    source-checksum: sha256/6de55a78b38809f5f74d9d667652b8afede579c6f4efeca58f6a4d5f49e2fc9f
     override-build: |
       case "$CRAFT_ARCH_BUILD_FOR" in
         amd64) cp linux/x64/PokeMMO-Updater $CRAFT_PART_INSTALL/launcher ;;
