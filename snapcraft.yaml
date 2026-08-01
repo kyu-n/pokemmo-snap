@@ -1,7 +1,7 @@
 name: pokemmo
 title: PokeMMO
 base: core24
-version: '4.0d'
+version: '4.0e'
 summary: PokeMMO Game Client
 license: 'Proprietary'
 grade: stable
@@ -26,13 +26,6 @@ platforms:
 assumes:
   - snapd2.55.5
 
-package-repositories:
-  - type: apt
-    components: [ main ]
-    suites: [ stable ]
-    key-id: 99A5C88E3C5B1FA8B05A19D332E9750179FCEA62
-    url: https://apt.bell-sw.com/
-
 apps:
   pokemmo:
     command: "./launcher"
@@ -45,9 +38,6 @@ apps:
       - audio-playback
       - removable-media
     environment:
-      JAVA_HOME: "$SNAP/runtime"
-      PATH: "$JAVA_HOME/bin/:$PATH"
-      _JAVA_OPTIONS: '-Dfile.encoding="UTF-8"'
       XDG_DATA_HOME: "$SNAP/usr/share"
       XDG_CONFIG_HOME: "$XDG_DATA_HOME/.config"
       POKEMMO_IS_SNAPPED: '1'
@@ -57,25 +47,16 @@ apps:
 parts:
   pokemmo:
     plugin: dump
-    source: https://github.com/PokeMMO/pokemmo-launcher/releases/download/v4.0d/build.zip
+    source: https://github.com/PokeMMO/pokemmo-launcher/releases/download/4.0e/build.zip
     source-type: zip
-    source-checksum: sha256/6de55a78b38809f5f74d9d667652b8afede579c6f4efeca58f6a4d5f49e2fc9f
+    source-checksum: sha256/3a710805442caab88d502db3ad453690814f1e49a0ec6092923aec5617518fb7
     override-build: |
       case "$CRAFT_ARCH_BUILD_FOR" in
         amd64) cp linux/x64/PokeMMO-Updater $CRAFT_PART_INSTALL/launcher ;;
         arm64) cp linux/arm64/PokeMMO-Updater $CRAFT_PART_INSTALL/launcher ;;
       esac
       chmod +x $CRAFT_PART_INSTALL/launcher
-      
-      # Handle legacy runtime directory
-      mkdir -p $CRAFT_PART_INSTALL/runtime
-      cp -r /usr/lib/jvm/bellsoft-java21-*/* $CRAFT_PART_INSTALL/runtime/ || true
     stage-packages:
-      - bellsoft-java21-runtime
       - libglu1-mesa
-      - zenity
       - libdecor-0-0
       - libdecor-0-plugin-1-gtk
-    build-packages:
-      - bellsoft-java21
-      - ca-certificates-java
